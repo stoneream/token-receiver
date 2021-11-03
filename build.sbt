@@ -8,6 +8,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "scala-template",
     libraryDependencies ++= Seq(
+      "com.github.nscala-time" %% "nscala-time" % "2.30.0",
       "org.scalatest" %% "scalatest" % "3.2.8"
     )
   )

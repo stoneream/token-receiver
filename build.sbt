@@ -1,27 +1,24 @@
-val scala213 = "2.13.10"
-
-ThisBuild / scalaVersion := scala213
-ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value)
-ThisBuild / semanticdbEnabled := true
-ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
-ThisBuild / scalafmtOnCompile := true
-ThisBuild / Compile / scalacOptions ++= List(
-  "-Ywarn-unused",
-  "-Yrangepos"
-)
-ThisBuild / organization := "com.github.stoneream"
-ThisBuild / version := "0.1.0-SNAPSHOT"
-
-lazy val root = (project in file(".")).settings(
-  name := "scala-template",
-  libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "3.2.14"
-  )
-)
+// === scala settings ===
 
 inThisBuild(
   List(
-    organization := "com.github.stoneream",
+    scalaVersion := "2.13.10",
+    scalacOptions ++= List(
+      "-Ywarn-unused",
+      "-Yrangepos"
+    ),
+    semanticdbEnabled := true,
+    semanticdbVersion := scalafixSemanticdb.revision,
+    scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value),
+    scalafmtOnCompile := true
+  )
+)
+
+// === project info ===
+
+inThisBuild(
+  List(
+    organization := "io.github.stoneream",
     homepage := Some(url("https://PROJECT-URL-HERE")),
     licenses := List("LICENSE NAME HERE" -> url("https://LICENSE-URL-HERE")),
     developers := List(
@@ -34,3 +31,30 @@ inThisBuild(
     )
   )
 )
+
+// === publish settings ===
+
+sonatypeCredentialHost := "s01.oss.sonatype.org"
+sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
+
+lazy val publishSettings = Seq(
+  publish / skip := false,
+  Test / publishArtifact := false,
+  versionScheme := Some("early-semver")
+)
+
+// === project setting ===
+
+lazy val root = (project in file(".")).settings(
+  name := "scala-template",
+  libraryDependencies ++= Seq(
+    "org.scalatest" %% "scalatest" % "3.2.14"
+  ),
+  publish / skip := true
+)
+//  .aggregate(subProject)
+
+//lazy val subProject = (project in file("subProject")).settings(
+//  name := "subProject",
+//  publishSettings
+//)

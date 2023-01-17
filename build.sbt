@@ -19,8 +19,8 @@ inThisBuild(
 inThisBuild(
   List(
     organization := "io.github.stoneream",
-    homepage := Some(url("https://PROJECT-URL-HERE")),
-    licenses := List("LICENSE NAME HERE" -> url("https://LICENSE-URL-HERE")),
+    homepage := Some(url("https://github.com/stoneream/token-receiver")),
+    licenses := List("Apache License 2.0" -> url("https://raw.githubusercontent.com/stoneream/token-receiver/main/LICENSE")),
     developers := List(
       Developer(
         "stoneream",
@@ -34,6 +34,7 @@ inThisBuild(
 
 // === publish settings ===
 
+/*
 sonatypeCredentialHost := "s01.oss.sonatype.org"
 sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 
@@ -42,6 +43,7 @@ lazy val publishSettings = Seq(
   Test / publishArtifact := false,
   versionScheme := Some("early-semver")
 )
+ */
 
 // === project setting ===
 
@@ -52,9 +54,3 @@ lazy val root = (project in file(".")).settings(
   ),
   publish / skip := true
 )
-//  .aggregate(subProject)
-
-//lazy val subProject = (project in file("subProject")).settings(
-//  name := "subProject",
-//  publishSettings
-//)

@@ -6,7 +6,7 @@ import java.net.InetSocketAddress
 import java.util.concurrent.{ExecutorService, Executors}
 
 object Main extends App {
-  private def temporaryHttpServer(onCallback: Map[String, String] => Unit)(executorService: ExecutorService): Unit = {
+  private def launchTemporaryHttpServer(onCallback: Map[String, String] => Unit)(executorService: ExecutorService): Unit = {
     val httpServer = HttpServer.create(new InetSocketAddress(8080), 0)
 
     val handler = new HttpHandler {
@@ -37,7 +37,7 @@ object Main extends App {
     httpServer.start()
   }
 
-  temporaryHttpServer(params => {
+  launchTemporaryHttpServer(params => {
     println(s"params => $params")
   })(Executors.newSingleThreadExecutor())
 }

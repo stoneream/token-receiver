@@ -46,7 +46,7 @@ lazy val publishSettings = Seq(
 // === project setting ===
 
 lazy val root = (project in file(".")).settings(
-  name := "scala-template",
+  name := "token-receiver",
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "3.2.14"
   ),

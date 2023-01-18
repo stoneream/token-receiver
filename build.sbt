@@ -35,7 +35,6 @@ inThisBuild(
 
 // === publish settings ===
 
-/*
 sonatypeCredentialHost := "s01.oss.sonatype.org"
 sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 
@@ -44,7 +43,6 @@ lazy val publishSettings = Seq(
   Test / publishArtifact := false,
   versionScheme := Some("early-semver")
 )
- */
 
 // === project setting ===
 

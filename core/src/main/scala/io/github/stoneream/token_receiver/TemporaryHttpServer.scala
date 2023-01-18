@@ -1,15 +1,15 @@
-package app
+package io.github.stoneream.token_receiver
 
 import com.sun.net.httpserver.{HttpExchange, HttpHandler, HttpServer}
 import com.typesafe.scalalogging.Logger
 
 import java.net.InetSocketAddress
-import java.util.concurrent.{ExecutorService, Executors}
+import java.util.concurrent.ExecutorService
 
-object Main extends App {
+class TemporaryHttpServer(onCallback: Map[String, String] => Unit)(executorService: ExecutorService) {
   private val logger = Logger(getClass.getName)
 
-  private def launchTemporaryHttpServer(onCallback: Map[String, String] => Unit)(executorService: ExecutorService): Unit = {
+  def start(): Unit = {
     val httpServer = HttpServer.create(new InetSocketAddress(8080), 0)
 
     val handler = new HttpHandler {
@@ -48,8 +48,4 @@ object Main extends App {
 
     logger.info(s"listening for http on ${httpServer.getAddress}")
   }
-
-  launchTemporaryHttpServer(params => {
-    println(s"params => $params")
-  })(Executors.newSingleThreadExecutor())
 }

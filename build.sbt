@@ -5,7 +5,8 @@ inThisBuild(
     scalaVersion := "2.13.10",
     scalacOptions ++= List(
       "-Ywarn-unused",
-      "-Yrangepos"
+      "-Yrangepos",
+      "-Ywarn-macros:after"
     ),
     semanticdbEnabled := true,
     semanticdbVersion := scalafixSemanticdb.revision,
@@ -49,11 +50,28 @@ lazy val publishSettings = Seq(
 
 lazy val root = (project in file(".")).settings(
   name := "token-receiver",
+  publish / skip := true
+).aggregate(core, example)
+
+lazy val core = (project in file("core")).settings(
+  name := "token-receiver-core",
   libraryDependencies ++= Seq(
-    "com.softwaremill.sttp.client3" %% "core" % "3.8.8",
     "ch.qos.logback" % "logback-classic" % "1.4.5",
-    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "org.scalatest" %% "scalatest" % "3.2.14" % Test,
+    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
+  )
+)
+
+lazy val sttpVersion = "3.8.8"
+lazy val circeVersion = "0.14.3"
+
+lazy val example = (project in file("example")).settings(
+  name := "token-receiver-example",
+  libraryDependencies ++= Seq(
+    "com.softwaremill.sttp.client3" %% "core" % sttpVersion,
+    "com.softwaremill.sttp.client3" %% "circe" % sttpVersion,
+    "io.circe" %% "circe-generic" % circeVersion,
+    "io.circe" %% "circe-generic-extras" % circeVersion,
+    "io.circe" %% "circe-literal" % circeVersion,
   ),
   publish / skip := true
-)
+).dependsOn(core)

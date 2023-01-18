@@ -56,7 +56,8 @@ lazy val core = (project in file("core")).settings(
   libraryDependencies ++= Seq(
     "ch.qos.logback" % "logback-classic" % "1.4.5",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
-  )
+  ),
+  publishSettings
 )
 
 lazy val sttpVersion = "3.8.8"

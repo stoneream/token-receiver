@@ -50,7 +50,10 @@ lazy val publishSettings = Seq(
 lazy val root = (project in file(".")).settings(
   name := "token-receiver",
   libraryDependencies ++= Seq(
-    "org.scalatest" %% "scalatest" % "3.2.14"
+    "com.softwaremill.sttp.client3" %% "core" % "3.8.8",
+    "ch.qos.logback" % "logback-classic" % "1.4.5",
+    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
+    "org.scalatest" %% "scalatest" % "3.2.14" % Test,
   ),
   publish / skip := true
 )

@@ -26,13 +26,13 @@ class TemporaryHttpServer(onCallback: Map[String, String] => Unit)(executorServi
             }.toMap
           }
 
+          exchange.sendResponseHeaders(200, 0)
+          exchange.getResponseBody.close()
+
           onCallback(queryParameters)
         } catch {
           case e: Throwable => e.printStackTrace()
         } finally {
-          exchange.sendResponseHeaders(200, 0)
-          exchange.getResponseBody.close()
-
           logger.debug("shutdown start")
 
           httpServer.stop(0)

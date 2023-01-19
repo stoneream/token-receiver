@@ -12,6 +12,6 @@ build.sbtに以下を追加。
 
 ```
 libraryDependencies ++= Seq(
-  "io.github.stoneream" %% "token-receiver-core" % "0.1.0"
+  "io.github.stoneream" %% "token-receiver-core" % "0.1.1"
 )
 ```

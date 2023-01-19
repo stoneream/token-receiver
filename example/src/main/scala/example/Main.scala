@@ -32,12 +32,14 @@ object Main extends App {
       code <- params.get("code")
       if callbackState == state
     } yield {
-      GoogleOAuth2Helper.accessTokenRequest(clientId, clientSecret, redirectUri, code)(client).fold(
-        _ => ???,
-        accessToken => {
-          println(s"access token here => $accessToken")
-        }
-      )
+      GoogleOAuth2Helper
+        .accessTokenRequest(clientId, clientSecret, redirectUri, code)(client)
+        .fold(
+          _ => ???,
+          accessToken => {
+            println(s"access token here => $accessToken")
+          }
+        )
     }
   })(executorService).start()
 }
